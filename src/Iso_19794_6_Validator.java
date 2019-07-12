@@ -1,21 +1,14 @@
-import java.util.Base64;
-
-
-public class Validator {
+public class Iso_19794_6_Validator {
 
     static int index;
-    public static void main(String[] args){
-        XmlParser parser=new XmlParser();
-        XmlParser.Record record=parser.Parser();
-        index=0;
-        Base64.Decoder decoder = Base64.getDecoder();
-        String dStr = new String(decoder.decode(record.biometric_record));
+    public boolean iris_validator(String dStr){
+
         String str=bytesToHex(dStr.getBytes());
-        System.out.println(str);
+
         if(isValidFormat(str) && isValidVersion(str) && isValidLength(str) && isValidIrisRepNumber(str) && isValidNumOfEyes(str))
-            System.out.println("VALID");
+            return true;
         else
-            System.out.print("INVALID");
+            return false;
     }
 
     private static boolean isValidVersion(String str) {
